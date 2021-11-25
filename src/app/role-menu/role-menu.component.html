@@ -1,0 +1,62 @@
+<div class="nav navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <h1>Angular</h1>
+        <div class="d-flex">
+            <button (click)="clickAddrole()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Create</button>
+        </div>
+    </div>
+</div>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">role Name</th>
+            <th scope="col">Menu</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="test1" *ngFor="let row of rolemenuData;let i = index">
+            <td>{{row.id}}</td>
+            <td>{{row.roleName}}</td>
+            <td>{{row.menu}}</td>
+            <td>
+                <button id="edit{{i}}" (click)="onEdit(row)" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
+                <button id="test{{i}}" (click)="deleteRole(row)" class="btn btn-danger mx-3">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formMenu" (ngSubmit)="submit()">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">role Name</label>
+                  <input type="text" formControlName="roleName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" formArrayName="menus" *ngFor="let menus of menusFormArray.controls; let i = index" class="test">
+                  <input id="check{{i}}" (change)="changeEvent($event)" type="checkbox" [formControlName]="i" > 
+                    {{menusData[i].name}}
+                </label>
+                <button id="menuaction" [hidden]="!tooglebool">submit</button>
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" *ngIf="showAdd" (click)="postRolemenu()" class="btn btn-primary">submit</button>
+          <button type="button" *ngIf="showUpdate" (click)="updateRole()" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>

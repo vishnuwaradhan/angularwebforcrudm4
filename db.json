@@ -1,0 +1,13 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "roleName": "admin",
+      "menu": "Process-1,Process-2,Process-3,Process-4"
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
